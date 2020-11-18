@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "arg": "^5.0.0",
+    "chai": "^4.2.0",
     "chalk": "^4.1.0",
     "esm": "^3.2.25",
     "execa": "^4.1.0",
@@ -28,5 +29,8 @@
     "listr": "^0.14.3",
     "ncp": "^2.0.0",
     "pkg-install": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1"
   }
 }
