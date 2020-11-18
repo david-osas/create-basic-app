@@ -1,0 +1,29 @@
+{
+  "name": "@nkosi-tauro/create-project",
+  "version": "1.0.0",
+  "description": "Quick Fix",
+  "main": "src/index.js",
+  "bin": {
+    "@nkosi-tauro/create-project": "bin/create-project",
+    "create-project": "bin/create-project"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "create-project"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "arg": "^5.0.0",
+    "chalk": "^4.1.0",
+    "esm": "^3.2.25",
+    "inquirer": "^7.3.3",
+    "ncp": "^2.0.0"
+  }
+}
