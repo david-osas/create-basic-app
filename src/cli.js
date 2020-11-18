@@ -44,7 +44,7 @@ async function promptForMissingOptions(options){
             message : 'Please Choose which Project Template to use',
             // Add Templates here
             choices :['Test'],
-            defualt : defaultTemplate,
+            default : defaultTemplate,
         })
     }
 
