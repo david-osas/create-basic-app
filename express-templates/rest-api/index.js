@@ -1,17 +1,15 @@
 // import server modules
-const express = require('express')
-const path = require('path');
+const express = require('express');
 
 //initialze server app
-const app = express()
+const app = express();
 
 //set middleware to parse data being exchanged between front and back ends
 app.use(express.json(), express.urlencoded({extended: false}));
 
-const baseResponse = 'Welcome to your basic REST api, this is your default HTTP';
-
 
 //set default REST api routes
+const baseResponse = 'Welcome to your basic REST api, this is your default HTTP';
 app.route('/')
   .get( (req,res) => {
     res.send(`${baseResponse} GET request`);
