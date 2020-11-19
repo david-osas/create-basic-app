@@ -4,3 +4,11 @@ express-templates/fullstack-app/node_modules
 
 #express rest api node modules
 express-templates/rest-api/node_modules
+
+
+#express sql node modules
+express-templates/no-sql/rest/node_modules
+
+
+#express sql node modules
+express-templates/no-sql/fullstack/node_modules
