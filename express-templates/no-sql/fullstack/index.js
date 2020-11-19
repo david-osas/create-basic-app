@@ -12,11 +12,16 @@ app.use(express.json(), express.urlencoded({extended: false}));
 
 //connect mongoose ODM to your MongoDB database
 const mongoDBLink = 'enter your database url here'
-mongoose.connect(mongoDBLink, {
-  useFindAndModify: false,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+try{
+  mongoose.connect(mongoDBLink, {
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+}catch(e){
+  console.log(e);
+}
+
 
 //default user schema definition
 const userSchema = mongoose.Schema({
