@@ -6,36 +6,33 @@ app.use(express.json(), express.urlencoded({extended: false}));
 
 const baseResponse = 'Welcome to your basic REST api, this is your default HTTP';
 
-app.get('/', (req,res) => {
-  res.send(`${baseResponse} GET request`);
+app.route('/')
+  .get( (req,res) => {
+    res.send(`${baseResponse} GET request`);
 
-});
+  })
+  .post( (req,res) => {
+    let value = req.body;
+    console.log(value);
+    res.send(`${baseResponse} POST request`);
 
-app.post('/', (req,res) => {
-  let value = req.body;
-  console.log(value);
-  res.send(`${baseResponse} POST request`);
+  })
+  .put( (req,res) => {
+    let value = req.body;
+    console.log(value);
+    res.send(`${baseResponse} PUT request`);
 
-});
+  })
+  .patch( (req,res) => {
+    let value = req.body;
+    console.log(value);
+    res.send(`${baseResponse} PATCH request`);
 
-app.put('/', (req,res) => {
-  let value = req.body;
-  console.log(value);
-  res.send(`${baseResponse} PUT request`);
+  })
+  .delete( (req,res) => {
+    res.send(`${baseResponse} DELETE request`);
 
-});
-
-app.patch('/', (req,res) => {
-  let value = req.body;
-  console.log(value);
-  res.send(`${baseResponse} PATCH request`);
-
-});
-
-app.delete('/', (req,res) => {
-  res.send(`${baseResponse} DELETE request`);
-
-});
+  });
 
 
 
