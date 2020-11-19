@@ -1,2 +1,6 @@
 #express full-stack app node modules
 express-templates/fullstack-app/node_modules
+
+
+#express rest api node modules
+express-templates/rest-api/node_modules
