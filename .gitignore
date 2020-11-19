@@ -8,3 +8,6 @@ express-templates/rest/rest-api/node_modules
 
 #express sql node modules
 express-templates/rest/rest-api-no-sql/node_modules
+
+#express test node modules
+test/node_modules
