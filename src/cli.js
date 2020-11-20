@@ -11,28 +11,34 @@ function parseArgumentsIntoOptions(rawArgs){
             '--install': Boolean,
             '-g': '--git',
             '-y': '--yes',
-            '-i': '--install'
+            '-i': '--install',
         },
         {
             argv: rawArgs.slice(2),
 
         }
     )
+    // // For Testing remove
+    // console.log(rawArgs)
     return {
         skipPrompts : args['--yes'] || false,
         git : args['--git'] || false,
         template: args._[0],
-        runInstall : args['--install'] || false
+        runInstall : args['--install'] || false,
+        projectName : args._[1]
+        
 
     }
 }
 
 async function promptForMissingOptions(options){
-    const defaultTemplate = 'Express';
+    const defaultTemplate = 'Test';
+    const defaultName = 'my-app';
     if (options.skipPrompts){
         return{
             ...options,
-            template: options.template || defaultTemplate
+            template: options.template || defaultTemplate,
+            projectName : options.projectName || defaultName
         }
     }
 
@@ -45,6 +51,13 @@ async function promptForMissingOptions(options){
             // Add Templates here
             choices :['Test'],
             default : defaultTemplate,
+        })
+    }
+    if(!options.projectName){
+        questions.push({
+            name : 'Project Name',
+            message: 'Enter your project name: ',
+            default : defaultName
         })
     }
 
@@ -61,13 +74,17 @@ async function promptForMissingOptions(options){
     return{
         ...options,
         template : options.template || answers.template,
+        projectName: options.projectName || answers.template,
         git : options.git || answers.git,
     }
 }
 
 export async function cli(args){
     let options = parseArgumentsIntoOptions(args);
+    // For Testing remove
+    // console.log(options)
     options = await promptForMissingOptions(options)
     await createProject(options)
-    console.log(options)
+    // // For Testing remove
+    // console.log(options)
 }
