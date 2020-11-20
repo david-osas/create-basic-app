@@ -55,7 +55,7 @@ async function promptForMissingOptions(options){
     }
     if(!options.projectName){
         questions.push({
-            name : 'Project Name',
+            name : 'projectName',
             message: 'Enter your project name: ',
             default : defaultName
         })
@@ -71,10 +71,12 @@ async function promptForMissingOptions(options){
     }
 
     const answers = await inquirer.prompt(questions)
+    // For Testing remove
+    // console.log(answers)
     return{
         ...options,
         template : options.template || answers.template,
-        projectName: options.projectName || answers.template,
+        projectName: options.projectName || answers.projectName,
         git : options.git || answers.git,
     }
 }
