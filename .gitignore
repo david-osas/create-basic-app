@@ -1,1 +1,14 @@
-node_modules/
+
+#express full-stack app node modules
+express-templates/fullstack/fullstack-app/node_modules
+
+
+#express rest api node modules
+express-templates/rest/rest-api/node_modules
+
+
+#express sql node modules
+express-templates/rest/rest-api-no-sql/node_modules
+
+#express test node modules
+test/node_modules

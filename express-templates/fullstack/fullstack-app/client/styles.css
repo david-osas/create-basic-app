@@ -1,0 +1,13 @@
+body{
+  background-color: #364f6b;
+  height: 100vh;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.first-class{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3fc1c9;
+}
