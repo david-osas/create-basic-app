@@ -6,9 +6,9 @@ import { projectInstall } from 'pkg-install'
 import {rest} from './copy/rest.js';
 import {fullstack} from './copy/fullstack.js';
 
-async function initGit(options) {
+async function initGit(options, newPath) {
     const result = await execa('git', ['init'], {
-        cwd: options.targetDirectory,
+        cwd: newPath,
     })
     if (result.failed) {
         return Promise.reject(new Error('Failed to initialize Git'));
@@ -31,13 +31,13 @@ export async function createProject(options) {
         },
         {
             title: 'Initialize Git',
-            task: () => initGit(options),
+            task: () => initGit(options, newPath),
             enabled: () => options.git
         },
         {
             title: 'Install dependecies',
             task: () => projectInstall({
-                cwd: options.targetDirectory,
+                cwd: newPath,
             }),
             skip: () => !options.runInstall ? 'Pass --install or --i to automatically install dependecies'
                 : undefined

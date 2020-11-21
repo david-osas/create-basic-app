@@ -9,7 +9,7 @@ const access = promisify(fs.access)
 // recursive file copy
 const copy = promisify(ncp);
 
-async function fullstack(feature, options, newPath){
+async function fullstack(feature, options, newPath, git){
   const currentFileUrl = import.meta.url;
   // Fix for the double C:/C:/
   //currentFileUrl = currentFileUrl.replace('file:///', '');
@@ -38,6 +38,11 @@ async function fullstack(feature, options, newPath){
       serverPath
   );
 
+  const gitignoreTemplate = path.join(
+      new URL(currentFileUrl).pathname,
+      '../../templates/fullstack/.gitignore'
+  );
+
   try {
       await access(baseTemplate, fs.constants.R_OK);
       await access(serverTemplate, fs.constants.R_OK);
@@ -49,10 +54,10 @@ async function fullstack(feature, options, newPath){
     process.exit(1);
   }
 
-  return copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath);
+  return copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath, git, gitignoreTemplate);
 }
 
-async function copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath){
+async function copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath, git, gitignoreTemplate){
 
   try {
     fs.mkdirSync(newPath)
@@ -72,6 +77,13 @@ async function copyFullstackTemplates(options, baseTemplate, serverTemplate, new
     // Prevent file overwrite when copying
     clobber: false
   });
+
+  if(git){
+    await copy(gitignoreTemplate, newPath, {
+      // Prevent file overwrite when copying
+      clobber: false
+    });
+  }
 }
 
 export {fullstack}
