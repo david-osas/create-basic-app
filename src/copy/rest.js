@@ -10,9 +10,6 @@ const access = promisify(fs.access)
 const copy = promisify(ncp);
 
 async function rest(feature, options, newPath){
-  const currentFileUrl = import.meta.url;
-  // Fix for the double C:/C:/
-  //currentFileUrl = currentFileUrl.replace('file:///', '');
   let restPath = '';
   switch(feature){
 
@@ -29,22 +26,25 @@ async function rest(feature, options, newPath){
   }
 
   const baseTemplate = path.join(
-      new URL(currentFileUrl).pathname,
-      '../../templates/rest',
+      __dirname,
+      '../../../templates/rest',
       restPath
   );
 
   const gitignoreTemplate = path.join(
-      new URL(currentFileUrl).pathname,
-      '../../templates/rest/.gitignore'
+      __dirname,
+      '../../../templates/rest/.gitignore'
   );
 
   try {
     await access(baseTemplate, fs.constants.R_OK);
+    await access(gitignoreTemplate, fs.constants.R_OK)
   }
   catch (err) {
     console.log(baseTemplate);
+    console.log(gitignoreTemplate);
     console.error('%s Invalid template name', chalk.red.bold("Error"));
+    console.log(err);
     process.exit(1);
   }
 

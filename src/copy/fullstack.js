@@ -10,12 +10,7 @@ const access = promisify(fs.access)
 const copy = promisify(ncp);
 
 async function fullstack(feature, options, newPath){
-  let currentFileUrl = import.meta.url;
-  // Fix for the double C:/C:/
-  //currentFileUrl = currentFileUrl.replace('file:///', '');
-  currentFileUrl = new URL(currentFileUrl).pathname;
-  currentFileUrl = currentFileUrl.substring(1);
-  //currentFileUrl = __dirname;
+  
   let serverPath = '';
   switch(feature){
 
@@ -32,17 +27,17 @@ async function fullstack(feature, options, newPath){
   }
 
   const baseTemplate = path.join(
-      currentFileUrl,
+      __dirname,
       '../../../templates/fullstack/fullstack-app'
   );
   const serverTemplate = path.join(
-      currentFileUrl,
+      __dirname,
       '../../../templates/fullstack',
       serverPath
   );
 
   const gitignoreTemplate = path.join(
-      currentFileUrl,
+      __dirname,
       '../../../templates/fullstack/.gitignore'
   );
 
