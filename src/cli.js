@@ -26,13 +26,13 @@ function parseArgumentsIntoOptions(rawArgs){
         template: args._[0],
         runInstall : args['--install'] || false,
         projectName : args._[1]
-        
+
 
     }
 }
 
 async function promptForMissingOptions(options){
-    const defaultTemplate = 'Test';
+    const defaultTemplate = 'Fullstack';
     const defaultName = 'my-app';
     if (options.skipPrompts){
         return{
@@ -49,7 +49,7 @@ async function promptForMissingOptions(options){
             name : 'template',
             message : 'Please Choose which Project Template to use',
             // Add Templates here
-            choices :['Test'],
+            choices :['Fullstack', 'Fullstack with SQL', 'Fullstack with NoSQL', 'Rest API', 'Rest API with SQL', 'Rest API with NoSQL'],
             default : defaultTemplate,
         })
     }
