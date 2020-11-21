@@ -9,7 +9,7 @@ const access = promisify(fs.access)
 // recursive file copy
 const copy = promisify(ncp);
 
-function rest(feature, options){
+async function rest(feature, options, newPath){
   const currentFileUrl = import.meta.url;
   // Fix for the double C:/C:/
   //currentFileUrl = currentFileUrl.replace('file:///', '');
@@ -43,12 +43,10 @@ function rest(feature, options){
     process.exit(1);
   }
 
-  return copyRestTemplates(options, baseTemplate);
+  return copyRestTemplates(options, baseTemplate, newPath);
 }
 
-async function copyRestTemplates(options, baseTemplate){
-  // Create App Folder
-  const newPath = `${options.targetDirectory}\\${options.projectName}`
+async function copyRestTemplates(options, baseTemplate, newPath){
 
   try {
     fs.mkdirSync(newPath)
@@ -57,7 +55,6 @@ async function copyRestTemplates(options, baseTemplate){
     console.log(err)
   }
 
-  options.targetDirectory = newPath
   await copy(baseTemplate, newPath, {
     // Prevent file overwrite when copying
     clobber: false

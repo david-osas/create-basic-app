@@ -9,7 +9,7 @@ const access = promisify(fs.access)
 // recursive file copy
 const copy = promisify(ncp);
 
-function fullstack(feature, options){
+async function fullstack(feature, options, newPath){
   const currentFileUrl = import.meta.url;
   // Fix for the double C:/C:/
   //currentFileUrl = currentFileUrl.replace('file:///', '');
@@ -49,12 +49,10 @@ function fullstack(feature, options){
     process.exit(1);
   }
 
-  return copyFullstackTemplates(options, baseTemplate, serverTemplate);
+  return copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath);
 }
 
-async function copyFullstackTemplates(options, baseTemplate, serverTemplate){
-  // Create App Folder
-  const newPath = `${options.targetDirectory}\\${options.projectName}`
+async function copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath){
 
   try {
     fs.mkdirSync(newPath)
@@ -63,7 +61,6 @@ async function copyFullstackTemplates(options, baseTemplate, serverTemplate){
     console.log(err)
   }
 
-  options.targetDirectory = newPath
   await copy(baseTemplate, newPath, {
     // Prevent file overwrite when copying
     clobber: false
