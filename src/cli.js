@@ -26,7 +26,7 @@ function parseArgumentsIntoOptions(rawArgs){
         template: args._[0],
         runInstall : args['--install'] || false,
         projectName : args._[1]
-        
+
 
     }
 }
