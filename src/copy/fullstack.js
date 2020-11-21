@@ -9,7 +9,7 @@ const access = promisify(fs.access)
 // recursive file copy
 const copy = promisify(ncp);
 
-async function fullstack(feature, options, newPath, git){
+async function fullstack(feature, options, newPath){
   const currentFileUrl = import.meta.url;
   // Fix for the double C:/C:/
   //currentFileUrl = currentFileUrl.replace('file:///', '');
@@ -54,10 +54,10 @@ async function fullstack(feature, options, newPath, git){
     process.exit(1);
   }
 
-  return copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath, git, gitignoreTemplate);
+  return copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath, gitignoreTemplate);
 }
 
-async function copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath, git, gitignoreTemplate){
+async function copyFullstackTemplates(options, baseTemplate, serverTemplate, newPath, gitignoreTemplate){
 
   try {
     fs.mkdirSync(newPath)
@@ -78,7 +78,7 @@ async function copyFullstackTemplates(options, baseTemplate, serverTemplate, new
     clobber: false
   });
 
-  if(git){
+  if(options.git){
     await copy(gitignoreTemplate, newPath, {
       // Prevent file overwrite when copying
       clobber: false

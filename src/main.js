@@ -23,11 +23,20 @@ export async function createProject(options) {
 
     }
     const newPath =  path.join(options.targetDirectory, options.projectName);
+    
+    let feature = '';
+    if(options.template === 'Fullstack' || options.template === 'Rest API'){
+      feature = 'default';
+    }else if(options.template === 'Fullstack with SQL' || options.template === 'Rest API with SQL'){
+      feature = 'sql';
+    }else{
+      feature  = 'no-sql';
+    }
 
     const tasks = new Listr([
         {
             title: 'Copying Project files',
-            task: () => copyTemplateFiles(options)
+            task: () => options.template.includes('Fullstack')? fullstack(feature, options, newPath) : rest(feature, options, newPath)
         },
         {
             title: 'Initialize Git',

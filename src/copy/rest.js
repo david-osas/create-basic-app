@@ -9,7 +9,7 @@ const access = promisify(fs.access)
 // recursive file copy
 const copy = promisify(ncp);
 
-async function rest(feature, options, newPath, git){
+async function rest(feature, options, newPath){
   const currentFileUrl = import.meta.url;
   // Fix for the double C:/C:/
   //currentFileUrl = currentFileUrl.replace('file:///', '');
@@ -48,10 +48,10 @@ async function rest(feature, options, newPath, git){
     process.exit(1);
   }
 
-  return copyRestTemplates(options, baseTemplate, newPath, git, gitignoreTemplate);
+  return copyRestTemplates(options, baseTemplate, newPath, gitignoreTemplate);
 }
 
-async function copyRestTemplates(options, baseTemplate, newPath, git, gitignoreTemplate){
+async function copyRestTemplates(options, baseTemplate, newPath, gitignoreTemplate){
 
   try {
     fs.mkdirSync(newPath)
@@ -65,7 +65,7 @@ async function copyRestTemplates(options, baseTemplate, newPath, git, gitignoreT
     clobber: false
   });
 
-  if(git){
+  if(options.git){
     await copy(gitignoreTemplate, newPath, {
       // Prevent file overwrite when copying
       clobber: false
