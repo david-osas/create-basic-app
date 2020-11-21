@@ -10,7 +10,7 @@ const access = promisify(fs.access)
 const copy = promisify(ncp);
 
 async function fullstack(feature, options, newPath){
-  
+
   let serverPath = '';
   switch(feature){
 
@@ -28,17 +28,17 @@ async function fullstack(feature, options, newPath){
 
   const baseTemplate = path.join(
       __dirname,
-      '../../../templates/fullstack/fullstack-app'
+      '../../templates/fullstack/fullstack-app'
   );
   const serverTemplate = path.join(
       __dirname,
-      '../../../templates/fullstack',
+      '../../templates/fullstack',
       serverPath
   );
 
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../../templates/fullstack/.gitignore'
+      '../../templates/fullstack/.gitignore'
   );
 
   try {
@@ -79,6 +79,12 @@ async function copyFullstackTemplates(options, baseTemplate, serverTemplate, new
     clobber: false
   });
 
+  await copy(gitignoreTemplate, newPath, {
+    // Prevent file overwrite when copying
+    clobber: false
+  });
+
+  console.log(options);
   if(options.git){
     await copy(gitignoreTemplate, newPath, {
       // Prevent file overwrite when copying
