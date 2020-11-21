@@ -23,7 +23,7 @@ export async function createProject(options) {
 
     }
     const newPath =  path.join(options.targetDirectory, options.projectName);
-    
+
     let feature = '';
     if(options.template === 'Fullstack' || options.template === 'Rest API'){
       feature = 'default';
@@ -35,7 +35,7 @@ export async function createProject(options) {
 
     const tasks = new Listr([
         {
-            title: 'Copying Project files',
+            title: 'Generating Project files',
             task: () => options.template.includes('Fullstack')? fullstack(feature, options, newPath) : rest(feature, options, newPath)
         },
         {

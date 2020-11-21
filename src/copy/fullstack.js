@@ -10,9 +10,12 @@ const access = promisify(fs.access)
 const copy = promisify(ncp);
 
 async function fullstack(feature, options, newPath){
-  const currentFileUrl = import.meta.url;
+  let currentFileUrl = import.meta.url;
   // Fix for the double C:/C:/
   //currentFileUrl = currentFileUrl.replace('file:///', '');
+  currentFileUrl = new URL(currentFileUrl).pathname;
+  currentFileUrl = currentFileUrl.substring(1);
+  //currentFileUrl = __dirname;
   let serverPath = '';
   switch(feature){
 
@@ -29,28 +32,31 @@ async function fullstack(feature, options, newPath){
   }
 
   const baseTemplate = path.join(
-      new URL(currentFileUrl).pathname,
-      '../../templates/fullstack/fullstack-app'
+      currentFileUrl,
+      '../../../templates/fullstack/fullstack-app'
   );
   const serverTemplate = path.join(
-      new URL(currentFileUrl).pathname,
-      '../../templates/fullstack',
+      currentFileUrl,
+      '../../../templates/fullstack',
       serverPath
   );
 
   const gitignoreTemplate = path.join(
-      new URL(currentFileUrl).pathname,
-      '../../templates/fullstack/.gitignore'
+      currentFileUrl,
+      '../../../templates/fullstack/.gitignore'
   );
 
   try {
       await access(baseTemplate, fs.constants.R_OK);
       await access(serverTemplate, fs.constants.R_OK);
+      await access(gitignoreTemplate, fs.constants.R_OK);
   }
   catch (err) {
     console.log(baseTemplate);
     console.log(serverTemplate);
+    console.log(gitignoreTemplate);
     console.error('%s Invalid template name', chalk.red.bold("Error"));
+    console.log(err);
     process.exit(1);
   }
 
