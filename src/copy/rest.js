@@ -4,12 +4,15 @@ import ncp from 'ncp';
 import path from 'path';
 import { promisify } from 'util';
 
-// check for r+w access
+// check for read + write access
 const access = promisify(fs.access)
 // recursive file copy
 const copy = promisify(ncp);
 
+//main rest api generation function
 async function rest(feature, options, newPath){
+
+  //set rest api server path based on the desired feature
   let restPath = '';
   switch(feature){
 
@@ -25,17 +28,20 @@ async function rest(feature, options, newPath){
     restPath = '/rest-api';
   }
 
+  //set absolute path to rest api base templates
   const baseTemplate = path.join(
       __dirname,
       '../../templates/rest',
       restPath
   );
 
+  //set absolute path to rest api gitignore file
   const gitignoreTemplate = path.join(
       __dirname,
       '../../templates/rest/git'
   );
 
+  //checks to make sure the template directories are accessable
   try {
     await access(baseTemplate, fs.constants.R_OK);
     await access(gitignoreTemplate, fs.constants.R_OK)
@@ -51,8 +57,10 @@ async function rest(feature, options, newPath){
   return copyRestTemplates(options, baseTemplate, newPath, gitignoreTemplate);
 }
 
+//function to carry out the actual copy of templates
 async function copyRestTemplates(options, baseTemplate, newPath, gitignoreTemplate){
 
+  //make new app directory
   try {
     fs.mkdirSync(newPath)
     console.log('App %s has been created!', chalk.bold.green(`${options.projectName}`))
@@ -60,11 +68,13 @@ async function copyRestTemplates(options, baseTemplate, newPath, gitignoreTempla
     console.log(err)
   }
 
+  //copy rest api base templates
   await copy(baseTemplate, newPath, {
     // Prevent file overwrite when copying
     clobber: false
   });
 
+  //copy gitignore file if requested
   if(options.git){
     await copy(gitignoreTemplate, newPath, {
       // Prevent file overwrite when copying

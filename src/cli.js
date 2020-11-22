@@ -18,8 +18,7 @@ function parseArgumentsIntoOptions(rawArgs){
 
         }
     )
-    // // For Testing remove
-    // console.log(rawArgs)
+
     return {
         skipPrompts : args['--yes'] || false,
         git : args['--git'] || false,
@@ -31,9 +30,12 @@ function parseArgumentsIntoOptions(rawArgs){
     }
 }
 
+//function to ask for app generation inputs from user
 async function promptForMissingOptions(options){
     const defaultTemplate = 'Fullstack';
     const defaultName = 'my-app';
+
+    //skips questions to ask the user if specified in command line arguments
     if (options.skipPrompts){
         return{
             ...options,
@@ -42,6 +44,7 @@ async function promptForMissingOptions(options){
         }
     }
 
+    //initializes argument questions to ask the user in the command line
     const questions = []
     if (!options.template){
         questions.push({
@@ -79,8 +82,8 @@ async function promptForMissingOptions(options){
     }
 
     const answers = await inquirer.prompt(questions)
-    // For Testing remove
-    // console.log(answers)
+
+    //updates and returns options variable based on answers from the user
     return{
         ...options,
         template : options.template || answers.template,
@@ -90,12 +93,10 @@ async function promptForMissingOptions(options){
     }
 }
 
+//main function called by cli command
 export async function cli(args){
     let options = parseArgumentsIntoOptions(args);
-    // For Testing remove
-    // console.log(options)
+
     options = await promptForMissingOptions(options)
     await createProject(options)
-    // // For Testing remove
-    // console.log(options)
 }

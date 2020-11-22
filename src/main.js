@@ -6,6 +6,7 @@ import { projectInstall } from 'pkg-install'
 import {rest} from './copy/rest.js';
 import {fullstack} from './copy/fullstack.js';
 
+//function to initialize git if desired
 async function initGit(options, newPath) {
     const result = await execa('git', ['init'], {
         cwd: newPath,
@@ -16,21 +17,29 @@ async function initGit(options, newPath) {
     return;
 }
 
+//function to generate new app
 export async function createProject(options) {
+
+  //sets target directory property
     options = {
         ...options,
         targetDirectory: options.targetDirectory || process.cwd(),
 
     }
+
+    //sets directory for new app created
     const newPath =  path.join(options.targetDirectory, options.projectName);
 
+    //gets output from pre-app generation checks
     let [feature, installPath, primaryFunct] = preGenerationChecks(options, newPath);
 
+    //ends function execution if pre-generations checks return a null
     if(feature === null || primaryFunct === null || installPath === null){
       console.error('%s Invalid arguments passed', chalk.red.bold("Error"));
       return false;
     }
 
+    //initializes generation tasks
     const tasks = new Listr([
         {
             title: 'Generating Project files',
@@ -53,11 +62,13 @@ export async function createProject(options) {
 
     await tasks.run()
 
+    //console logs final output
     console.log('%s Project ready', chalk.green.bold('DONE'))
     return true;
 
 }
 
+//function to carry out pre-app generation checks on arguments gotten from command line
 function preGenerationChecks(options, newPath){
   let feature = null;
   let installPath = null;
