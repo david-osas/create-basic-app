@@ -33,7 +33,7 @@ async function rest(feature, options, newPath){
 
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../templates/rest/.gitignore'
+      '../../templates/rest/git'
   );
 
   try {
