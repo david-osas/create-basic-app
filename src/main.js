@@ -24,19 +24,17 @@ export async function createProject(options) {
     }
     const newPath =  path.join(options.targetDirectory, options.projectName);
 
-    let feature = '';
-    if(options.template === 'Fullstack' || options.template === 'Rest API'){
-      feature = 'default';
-    }else if(options.template === 'Fullstack with SQL' || options.template === 'Rest API with SQL'){
-      feature = 'sql';
-    }else{
-      feature  = 'no-sql';
+    let [feature, installPath, primaryFunct] = preGenerationChecks(options, newPath);
+
+    if(feature === null || primaryFunct === null || installPath === null){
+      console.error('%s Invalid arguments passed', chalk.red.bold("Error"));
+      return false;
     }
 
     const tasks = new Listr([
         {
             title: 'Generating Project files',
-            task: () => options.template.includes('Fullstack')? fullstack(feature, options, newPath) : rest(feature, options, newPath)
+            task: () => primaryFunct(feature, options, newPath)
         },
         {
             title: 'Initialize Git',
@@ -46,10 +44,9 @@ export async function createProject(options) {
         {
             title: 'Install dependecies',
             task: () => projectInstall({
-                cwd: newPath,
+                cwd: installPath,
             }),
-            skip: () => !options.runInstall ? 'Pass --install or --i to automatically install dependecies'
-                : undefined
+            enabled: () => options.runInstall
         }
 
     ]);
@@ -59,4 +56,29 @@ export async function createProject(options) {
     console.log('%s Project ready', chalk.green.bold('DONE'))
     return true;
 
+}
+
+function preGenerationChecks(options, newPath){
+  let feature = null;
+  let installPath = null;
+  let primaryFunct = null;
+
+  if(options.template.includes('fullstack')){
+    primaryFunct = fullstack;
+    installPath = path.join(newPath, '/server');
+
+  }else if(options.template.includes('rest')){
+    primaryFunct = rest;
+    installPath = newPath;
+  }
+
+  if(options.template === 'fullstack' || options.template === 'rest-api'){
+    feature = 'default';
+  }else if(options.template === 'fullstack-with-sql' || options.template === 'rest-api-with-sql'){
+    feature = 'sql';
+  }else if(options.template === 'fullstack-with-nosql' || options.template === 'rest-api-with-nosql'){
+    feature  = 'no-sql';
+  }
+
+  return [feature, installPath, primaryFunct];
 }

@@ -49,7 +49,7 @@ async function promptForMissingOptions(options){
             name : 'template',
             message : 'Please Choose which Project Template to use',
             // Add Templates here
-            choices :['Fullstack', 'Fullstack with SQL', 'Fullstack with NoSQL', 'Rest API', 'Rest API with SQL', 'Rest API with NoSQL'],
+            choices :['fullstack', 'fullstack-with-sql', 'fullstack-with-nosql', 'rest-api', 'rest-api-with-sql', 'rest-api-with-nosql'],
             default : defaultTemplate,
         })
     }
@@ -69,6 +69,14 @@ async function promptForMissingOptions(options){
             default : false,
         })
     }
+    if (!options.runInstall){
+        questions.push({
+            type: 'confirm',
+            name: 'runInstall',
+            message : 'Automatically install dependecies',
+            default : false,
+        })
+    }
 
     const answers = await inquirer.prompt(questions)
     // For Testing remove
@@ -78,6 +86,7 @@ async function promptForMissingOptions(options){
         template : options.template || answers.template,
         projectName: options.projectName || answers.projectName,
         git : options.git || answers.git,
+        runInstall : options.runInstall || answers.runInstall,
     }
 }
 
