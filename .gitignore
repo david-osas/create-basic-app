@@ -14,3 +14,5 @@ express-templates/rest/rest-api-no-sql/node_modules
 test/node_modules
 
 node_modules/
+
+.github/
