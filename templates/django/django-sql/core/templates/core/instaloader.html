@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<div class="header">
+  <h3>Instaloader Method</h3>
+  <a
+    href="https://instaloader.github.io/module/structures.html#instaloader.Profile.from_username"
+    target="_blank"
+  >
+    instaloader.Profile.from_username
+  </a>
+</div>
+<form action="{% url 'instaloader' %}" method="post">
+  {% csrf_token %} {{ form }}
+  <input type="submit" value="Fetch Posts" />
+</form>
+{% endblock %}

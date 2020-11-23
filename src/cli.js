@@ -52,7 +52,7 @@ async function promptForMissingOptions(options){
             name : 'template',
             message : 'Please Choose which Project Template to use',
             // Add Templates here
-            choices :['fullstack', 'fullstack-with-sql', 'fullstack-with-nosql', 'rest-api', 'rest-api-with-sql', 'rest-api-with-nosql'],
+            choices :['fullstack', 'fullstack-with-sql', 'fullstack-with-nosql', 'rest-api', 'rest-api-with-sql', 'rest-api-with-nosql', 'django-sql','djangoRest', 'flask-sql', 'flaskRest'],
             default : defaultTemplate,
         })
     }
@@ -76,7 +76,7 @@ async function promptForMissingOptions(options){
         questions.push({
             type: 'confirm',
             name: 'runInstall',
-            message : 'Automatically install dependecies',
+            message : 'Automatically install npm dependecies',
             default : false,
         })
     }

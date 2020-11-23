@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<h3>Instagram Posts</h3>
+
+<ul>
+  {% for post in object_list %}
+  <li>{{ post }}</li>
+  {% empty %}
+  <li>
+    No posts.
+    <a href="{% url 'instaloader' %}">Fetch Instagram Posts.</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
