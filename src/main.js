@@ -3,8 +3,8 @@ import path from 'path';
 import execa from 'execa'
 import Listr from 'listr'
 import { projectInstall } from 'pkg-install'
-import {rest} from './copy/rest.js';
-import {fullstack} from './copy/fullstack.js';
+import {expressRest} from './copy/express-rest.js';
+import {expressFullstack} from './copy/express-fullstack.js';
 import { django } from './copy/django.js';
 import { flaskgen } from './copy/flaskgen.js';
 
@@ -92,12 +92,12 @@ function preGenerationChecks(options, newPath){
   let installPath = null;
   let primaryFunct = null;
 
-  if(options.template.includes('fullstack')){
-    primaryFunct = fullstack;
+  if(options.template.includes('express-fullstack')){
+    primaryFunct = expressFullstack;
     installPath = path.join(newPath, '/server');
 
-  }else if(options.template.includes('rest')){
-    primaryFunct = rest;
+  }else if(options.template.includes('express-rest')){
+    primaryFunct = expressRest;
     installPath = newPath;
   }
   else if(options.template.includes('flask')){
@@ -110,11 +110,11 @@ function preGenerationChecks(options, newPath){
     installPath = newPath
   }
 
-  if(options.template === 'fullstack' || options.template === 'rest-api'|| options.template === 'flask-sql' || options.template === 'django-sql'){
+  if(options.template === 'express-fullstack' || options.template === 'express-rest-api'|| options.template === 'flask-sql' || options.template === 'django-sql'){
     feature = 'default';
-  }else if(options.template === 'fullstack-with-sql' || options.template === 'rest-api-with-sql'|| options.template === 'flask-sql'|| options.template === 'django-sql'){
+  }else if(options.template === 'express-fullstack-with-sql' || options.template === 'express-rest-api-with-sql'|| options.template === 'flask-sql'|| options.template === 'django-sql'){
     feature = 'sql';
-  }else if(options.template === 'fullstack-with-nosql' || options.template === 'rest-api-with-nosql'){
+  }else if(options.template === 'express-fullstack-with-nosql' || options.template === 'express-rest-api-with-nosql'){
     feature  = 'no-sql';
   }
   else if(options.template === 'flaskRest' || options.template === 'djangoRest' ){

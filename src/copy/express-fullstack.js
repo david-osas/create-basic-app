@@ -10,7 +10,7 @@ const access = promisify(fs.access)
 const copy = promisify(ncp);
 
 //main fullstack generation function
-async function fullstack(feature, options, newPath){
+async function expressFullstack(feature, options, newPath){
 
   //set fullstack server path based on the desired feature
   let serverPath = '';
@@ -31,20 +31,20 @@ async function fullstack(feature, options, newPath){
   //set absolute path to fullstack base templates
   const baseTemplate = path.join(
       __dirname,
-      '../../templates/fullstack/fullstack-app'
+      '../../templates/express-fullstack/fullstack-app'
   );
 
   //set abolsute path to fullstack server templates
   const serverTemplate = path.join(
       __dirname,
-      '../../templates/fullstack',
+      '../../templates/express-fullstack',
       serverPath
   );
 
   //set absolute path to fullstack gitignore file
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../templates/fullstack/git'
+      '../../templates/express-fullstack/git'
   );
 
   //checks to make sure the template directories are accessable
@@ -100,4 +100,4 @@ async function copyFullstackTemplates(options, baseTemplate, serverTemplate, new
   }
 }
 
-export {fullstack}
+export {expressFullstack}

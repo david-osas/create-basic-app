@@ -54,7 +54,9 @@ async function promptForMissingOptions(options){
             name : 'template',
             message : 'Please Choose which Project Template to use',
             // Add Templates here
-            choices :['fullstack', 'fullstack-with-sql', 'fullstack-with-nosql', 'rest-api', 'rest-api-with-sql', 'rest-api-with-nosql', 'django-sql','djangoRest', 'flask-sql', 'flaskRest'],
+            choices :['express-fullstack', 'express-fullstack-with-sql', 'express-fullstack-with-nosql',
+             'express-rest-api', 'express-rest-api-with-sql', 'express-rest-api-with-nosql', 
+             'django-sql','djangoRest', 'flask-sql', 'flaskRest'],
             default : defaultTemplate,
         })
     }
