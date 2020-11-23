@@ -5,6 +5,8 @@ import Listr from 'listr'
 import { projectInstall } from 'pkg-install'
 import {rest} from './copy/rest.js';
 import {fullstack} from './copy/fullstack.js';
+import { django } from './copy/django.js';
+import { flaskgen } from './copy/flaskgen.js';
 
 //function to initialize git if desired
 async function initGit(options, newPath) {
@@ -15,6 +17,17 @@ async function initGit(options, newPath) {
         return Promise.reject(new Error('Failed to initialize Git'));
     }
     return;
+}
+
+//function to install python if desired
+async function pipIntsall(options, installPath) {
+  const result = await execa('pip', ['install','-r', 'requirements.txt'], {
+      cwd: installPath,
+  })
+  if (result.failed) {
+      return Promise.reject(new Error('Failed to install requirements'));
+  }
+  return;
 }
 
 //function to generate new app
@@ -51,12 +64,17 @@ export async function createProject(options) {
             enabled: () => options.git
         },
         {
-            title: 'Install dependecies',
+            title: 'Install node dependecies',
             task: () => projectInstall({
                 cwd: installPath,
             }),
             enabled: () => options.runInstall
-        }
+        },
+        {
+          title: 'Install pip dependecies',
+          task: () => pipIntsall(options, installPath),
+          enabled: () => options.runPipInstall
+      }
 
     ]);
 
@@ -82,14 +100,28 @@ function preGenerationChecks(options, newPath){
     primaryFunct = rest;
     installPath = newPath;
   }
+  else if(options.template.includes('flask')){
+    primaryFunct = flaskgen;
+    installPath = newPath
+  }
 
-  if(options.template === 'fullstack' || options.template === 'rest-api'){
+  else if(options.template.includes('django')){
+    primaryFunct = django;
+    installPath = newPath
+  }
+
+  if(options.template === 'fullstack' || options.template === 'rest-api'|| options.template === 'flask-sql' || options.template === 'django-sql'){
     feature = 'default';
-  }else if(options.template === 'fullstack-with-sql' || options.template === 'rest-api-with-sql'){
+  }else if(options.template === 'fullstack-with-sql' || options.template === 'rest-api-with-sql'|| options.template === 'flask-sql'|| options.template === 'django-sql'){
     feature = 'sql';
   }else if(options.template === 'fullstack-with-nosql' || options.template === 'rest-api-with-nosql'){
     feature  = 'no-sql';
   }
+  else if(options.template === 'flaskRest' || options.template === 'djangoRest' ){
+    feature ='python-rest';
+  }
+
+
 
   return [feature, installPath, primaryFunct];
 }
