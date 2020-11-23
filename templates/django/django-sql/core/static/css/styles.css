@@ -1,0 +1,12 @@
+.header {
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > input {
+  margin-bottom: 20px;
+}

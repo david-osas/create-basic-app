@@ -9,31 +9,35 @@ function parseArgumentsIntoOptions(rawArgs){
             '--git': Boolean,
             '--yes': Boolean,
             '--install': Boolean,
+            '--pip' : Boolean,
             '-g': '--git',
             '-y': '--yes',
             '-i': '--install',
+            '-p':'--pip'
         },
         {
             argv: rawArgs.slice(2),
 
         }
     )
-    // // For Testing remove
-    // console.log(rawArgs)
+
     return {
         skipPrompts : args['--yes'] || false,
         git : args['--git'] || false,
         template: args._[0],
         runInstall : args['--install'] || false,
-        projectName : args._[1]
-
+        projectName : args._[1],
+        runPipInstall : args['--pip'] || false
 
     }
 }
 
+//function to ask for app generation inputs from user
 async function promptForMissingOptions(options){
-    const defaultTemplate = 'Test';
+    const defaultTemplate = 'Fullstack';
     const defaultName = 'my-app';
+
+    //skips questions to ask the user if specified in command line arguments
     if (options.skipPrompts){
         return{
             ...options,
@@ -42,6 +46,7 @@ async function promptForMissingOptions(options){
         }
     }
 
+    //initializes argument questions to ask the user in the command line
     const questions = []
     if (!options.template){
         questions.push({
@@ -49,7 +54,7 @@ async function promptForMissingOptions(options){
             name : 'template',
             message : 'Please Choose which Project Template to use',
             // Add Templates here
-            choices :['Test'],
+            choices :['fullstack', 'fullstack-with-sql', 'fullstack-with-nosql', 'rest-api', 'rest-api-with-sql', 'rest-api-with-nosql', 'django-sql','djangoRest', 'flask-sql', 'flaskRest'],
             default : defaultTemplate,
         })
     }
@@ -69,24 +74,40 @@ async function promptForMissingOptions(options){
             default : false,
         })
     }
+    if (!options.runInstall){
+        questions.push({
+            type: 'confirm',
+            name: 'runInstall',
+            message : 'Automatically install npm dependecies',
+            default : false,
+        })
+    }
+    if (!options.runPipInstall){
+        questions.push({
+            type: 'confirm',
+            name: 'runPipInstall',
+            message : 'Automatically install python dependecies',
+            default : false,
+        })
+    }
 
     const answers = await inquirer.prompt(questions)
-    // For Testing remove
-    // console.log(answers)
+
+    //updates and returns options variable based on answers from the user
     return{
         ...options,
         template : options.template || answers.template,
         projectName: options.projectName || answers.projectName,
         git : options.git || answers.git,
+        runInstall : options.runInstall || answers.runInstall,
+        runPipInstall : options.runPipInstall || answers.runPipInstall
     }
 }
 
+//main function called by cli command
 export async function cli(args){
     let options = parseArgumentsIntoOptions(args);
-    // For Testing remove
-    // console.log(options)
+
     options = await promptForMissingOptions(options)
     await createProject(options)
-    // // For Testing remove
-    // console.log(options)
 }
