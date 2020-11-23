@@ -9,9 +9,11 @@ function parseArgumentsIntoOptions(rawArgs){
             '--git': Boolean,
             '--yes': Boolean,
             '--install': Boolean,
+            '--pip' : Boolean,
             '-g': '--git',
             '-y': '--yes',
             '-i': '--install',
+            '-p':'--pip'
         },
         {
             argv: rawArgs.slice(2),
@@ -24,8 +26,8 @@ function parseArgumentsIntoOptions(rawArgs){
         git : args['--git'] || false,
         template: args._[0],
         runInstall : args['--install'] || false,
-        projectName : args._[1]
-
+        projectName : args._[1],
+        runPipInstall : args['--pip'] || false
 
     }
 }
@@ -80,6 +82,14 @@ async function promptForMissingOptions(options){
             default : false,
         })
     }
+    if (!options.runPipInstall){
+        questions.push({
+            type: 'confirm',
+            name: 'runPipInstall',
+            message : 'Automatically install python dependecies',
+            default : false,
+        })
+    }
 
     const answers = await inquirer.prompt(questions)
 
@@ -90,6 +100,7 @@ async function promptForMissingOptions(options){
         projectName: options.projectName || answers.projectName,
         git : options.git || answers.git,
         runInstall : options.runInstall || answers.runInstall,
+        runPipInstall : options.runPipInstall || answers.runPipInstall
     }
 }
 

@@ -19,6 +19,17 @@ async function initGit(options, newPath) {
     return;
 }
 
+//function to install python if desired
+async function pipIntsall(options, installPath) {
+  const result = await execa('pip', ['install','-r', 'requirements.txt'], {
+      cwd: installPath,
+  })
+  if (result.failed) {
+      return Promise.reject(new Error('Failed to install requirements'));
+  }
+  return;
+}
+
 //function to generate new app
 export async function createProject(options) {
 
@@ -53,12 +64,17 @@ export async function createProject(options) {
             enabled: () => options.git
         },
         {
-            title: 'Install dependecies',
+            title: 'Install node dependecies',
             task: () => projectInstall({
                 cwd: installPath,
             }),
             enabled: () => options.runInstall
-        }
+        },
+        {
+          title: 'Install pip dependecies',
+          task: () => pipIntsall(options, installPath),
+          enabled: () => options.runPipInstall
+      }
 
     ]);
 
