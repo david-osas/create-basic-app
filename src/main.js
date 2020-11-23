@@ -2,7 +2,6 @@ import chalk from 'chalk';
 import path from 'path';
 import execa from 'execa'
 import Listr from 'listr'
-import { projectInstall } from 'pkg-install'
 import {expressRest} from './copy/express-rest.js';
 import {expressFullstack} from './copy/express-fullstack.js';
 import { django } from './copy/django.js';
@@ -77,7 +76,7 @@ export async function createProject(options) {
             task: () => appInstall(options, installPath),
             enabled: () => options.runInstall
         }
-        
+
     ]);
 
     await tasks.run()
