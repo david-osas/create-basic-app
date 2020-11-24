@@ -10,7 +10,7 @@ const access = promisify(fs.access)
 const copy = promisify(ncp);
 
 //main rest api generation function
-async function rest(feature, options, newPath){
+async function expressRest(feature, options, newPath){
 
   //set rest api server path based on the desired feature
   let restPath = '';
@@ -31,14 +31,14 @@ async function rest(feature, options, newPath){
   //set absolute path to rest api base templates
   const baseTemplate = path.join(
       __dirname,
-      '../../templates/rest',
+      '../../templates/express-rest',
       restPath
   );
 
   //set absolute path to rest api gitignore file
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../templates/rest/git'
+      '../../templates/express-rest/git'
   );
 
   //checks to make sure the template directories are accessable
@@ -83,4 +83,4 @@ async function copyRestTemplates(options, baseTemplate, newPath, gitignoreTempla
   }
 }
 
-export {rest}
+export {expressRest}
