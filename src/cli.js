@@ -11,8 +11,7 @@ function parseArgumentsIntoOptions(rawArgs){
             '--install': Boolean,
             '-g': '--git',
             '-y': '--yes',
-            '-i': '--install',
-            '-p':'--pip'
+            '-i': '--install'
         },
         {
             argv: rawArgs.slice(2),
