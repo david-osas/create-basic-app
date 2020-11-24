@@ -1,70 +1,19 @@
-# About this project
+# Simple CRUD with Django 1.10 & SQLite 3
 
-**Django + CELERY + SQLite Boilerplate.**
-
-The intent of this project is to:
-
-1. Validate **SQLite migration** and **CRUD operations** in a Django application.
-2. Integrate **INSTALOADER** with **CELERY**
-
-
-
-# Dependencies
-
-```python
-# Setup Celery
-https://docs.celeryproject.org/en/stable/getting-started/first-steps-with-celery.html
-
-# Setup RabbitMQ or Redis as a SERVICE
-https://www.rabbitmq.com/download.html
+### Setup
+- Download Python Here `required python version 3.4.x` [https://www.python.org/downloads/](https://www.python.org/downloads/)
+- Install it
+- Install Django you can choose 3 easy step to install here [https://docs.djangoproject.com/en/1.10/intro/install/](https://docs.djangoproject.com/en/1.10/intro/install/)
+- open your command line type this in python cli if success will be showing django version
+```php
+	>>> import django
+	>>> print(django.get_version())
+	1.10
 ```
 
-# How to start
+### How to Run
 
-```python
-# Install Module Dependencies
-pip install requirements.txt
-```
+- open your command line and type `python manage.py runserver`
+- open your browser and type url [http://localhost:8000/firstapp/](http://localhost:8000/firstapp/)
 
-```python
-# In one terminal tab
-# Start the django application
-python manage.py runserver
-```
 
-```python
-# In another terminal tab
-# Start celery
-celery -A digimarket_test worker --pool=eventlet -l INFO
-```
-
-# File Streucture
-
-```js
-/digimarket_test
-  manage.py
-  /digimarket_test
-    __init__.py
-    settings.py
-    urls.py
-    asgi.py
-    wsgi.py
-  /code
-    /migrations
-    /static // Static files
-    /templates // Django template filees
-    __init__.py
-    admin.py
-    apps.py
-    forms.py
-    modles.py
-    tasks.py // Celery Task
-    tests.py
-    urls.py // Django endpoint/route setup
-    views.py // View Renderer
-```
-
-# References
-
-1. (Django + Celery) https://simpleisbetterthancomplex.com/tutorial/2017/08/20/how-to-use-celery-with-django.html
-2. (Instaloader) https://instaloader.github.io/codesnippets.html

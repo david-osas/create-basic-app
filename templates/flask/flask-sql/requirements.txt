@@ -1,3 +1,1 @@
-flask-restx
-flask-sqlalchemy
-pymysql
+flask==1.0.2
