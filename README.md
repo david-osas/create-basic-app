@@ -29,10 +29,10 @@ To run the CLI without installing globally run (for testing or development)
 --install : Install app dependencies
 --yes: Skip template option prompts
 --help: Show commands and options information about the CLI
--g : same as `--git`
--i : same as `--install`
--y : same as `--yes`
--h: same as `--help`
+-g : same as --git
+-i : same as --install
+-y : same as --yes
+-h: same as --help
 
 ```
 
