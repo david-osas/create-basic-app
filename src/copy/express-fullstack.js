@@ -44,7 +44,7 @@ async function expressFullstack(feature, options, newPath){
   //set absolute path to fullstack gitignore file
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../templates/express-fullstack/git'
+      '../../templates/express-fullstack/gitFolder'
   );
 
   //checks to make sure the template directories are accessable

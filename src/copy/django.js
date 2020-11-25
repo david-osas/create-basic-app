@@ -38,7 +38,7 @@ async function django(feature, options, newPath){
   //set absolute path to rest api gitignore file
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../templates/django/git'
+      '../../templates/django/gitFolder'
   );
 
   //checks to make sure the template directories are accessable

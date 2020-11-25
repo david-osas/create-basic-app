@@ -38,7 +38,7 @@ async function flaskgen(feature, options, newPath){
   //set absolute path to rest api gitignore file
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../templates/flask/git'
+      '../../templates/flask/gitFolder'
   );
 
   //checks to make sure the template directories are accessable
