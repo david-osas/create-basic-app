@@ -13,19 +13,24 @@ app.use(express.json(), express.urlencoded({extended: false}));
 let sequelize;
 
 //default check to initialze sequelize whether in a development or production environment
-if(app.get('env') === 'production'){
-  const postgresURI = 'enter your postgres database URI'
-  sequelize = new Sequelize(postgresURI);
+try{
+  if(app.get('env') === 'production'){
+    const postgresURI = 'enter your postgres database URI'
+    sequelize = new Sequelize(postgresURI);
 
-}else{
-  const dbName = 'enter your postgres database name';
-  const username = 'enter your postgres database username';
-  const password = 'enter your postgres database password';
+  }else{
+    const dbName = 'enter your postgres database name';
+    const username = 'enter your postgres database username';
+    const password = 'enter your postgres database password';
 
-  sequelize = new Sequelize(dbName, username, password, {
-    host: 'localhost',
-    dialect: 'postgres'
-  });
+    sequelize = new Sequelize(dbName, username, password, {
+      host: 'localhost',
+      dialect: 'postgres'
+    });
+  }
+
+}catch(e){
+  console.log(e);
 }
 
 //use default routes
