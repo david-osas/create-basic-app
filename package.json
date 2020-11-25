@@ -2,7 +2,7 @@
   "name": "@nkosi-tauro/create-basic-app",
   "version": "1.0.0",
   "description": "A CLI tool to quickly bootstrap starter code",
-  "main": "src/index.js",
+  "main": "src/cli.js",
   "bin": {
     "@nkosi-tauro/create-project": "bin/create-basic-app",
     "create-basic-app": "bin/create-basic-app"
