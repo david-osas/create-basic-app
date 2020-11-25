@@ -82,8 +82,33 @@ export async function createProject(options) {
     await tasks.run()
 
     //console logs final output
-    console.log('%s Project ready', chalk.green.bold('DONE'))
+    console.log('%s Project ready', chalk.green.bold('DONE'));
+    starterInstructions(primaryFunct);
     return true;
+
+}
+
+//function to display instructions on running newly generated apps
+function starterInstructions(primaryFunct){
+  switch(primaryFunct){
+    case expressFullstack:
+    console.log('\nTo start default app use the commands');
+    console.log('%s',chalk.cyan.italic('cd <app-name>/server'));
+    console.log('and then');
+    console.log('%s', chalk.cyan.italic('node index.js'));
+    break;
+
+    case expressRest:
+    console.log('\nTo start default app use the commands');
+    console.log('%s',chalk.cyan.italic('cd <app-name>'));
+    console.log('and then');
+    console.log('%s', chalk.cyan.italic('node index.js'));
+    break;
+
+    default:
+    console.log('');
+
+  }
 
 }
 
