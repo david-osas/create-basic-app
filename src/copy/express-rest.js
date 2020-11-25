@@ -38,7 +38,7 @@ async function expressRest(feature, options, newPath){
   //set absolute path to rest api gitignore file
   const gitignoreTemplate = path.join(
       __dirname,
-      '../../templates/express-rest/gitFolder'
+      '../../templates/express-rest/git'
   );
 
   //checks to make sure the template directories are accessable
