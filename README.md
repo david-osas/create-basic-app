@@ -38,6 +38,8 @@ To run the CLI without installing globally run (for testing or development)
 -h: same as --help
 
 ```
+### 📺 Demo 
+<br>
 
 ![CLI usage](project.gif?raw=true)
 
