@@ -76,10 +76,17 @@ async function copyRestTemplates(options, baseTemplate, newPath, gitignoreTempla
 
   //copy gitignore file if requested
   if(options.git){
+    //generate gitignore file
     await copy(gitignoreTemplate, newPath, {
       // Prevent file overwrite when copying
       clobber: false
     });
+
+    //rename gitignore file to .gitignore
+    const oldName = path.join(newPath, 'gitignore');
+    const newName = path.join(newPath, '.gitignore');
+
+    fs.renameSync(oldName, newName);
   }
 }
 
