@@ -28,7 +28,6 @@ function parseArgumentsIntoOptions(rawArgs) {
         template: args._[0],
         runInstall: args['--install'] || false,
         projectName: args._[1],
-        // Currently toggled to true for testing as it seems the ar
         helpInfo: args['--help'] || false,
 
     }
@@ -43,6 +42,7 @@ async function promptForMissingOptions(options) {
     const defaultName = 'my-app';
     const defaultCategory = 'javascript';
 
+    // if help options == true call the helpDocumentation method
     if (options.helpInfo) {
         console.log(helpDocumentation())
         process.exit()
