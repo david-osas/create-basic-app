@@ -140,33 +140,33 @@ export async function cli(args) {
 function helpDocumentation() {
     let docs = `Welcome to Create-Basic-App : A CLI tool to quickly bootstrap starter code
 
-${chalk.black.bgGreen.bold(" USAGE ")}
+${chalk.green.bold("USAGE ")}
 
 $ ${chalk.green.bold('create-basic-app')} ${chalk.red.bold('<template_name>')} ${chalk.blue.bold('<project_name>')} ${chalk.yellow.bold('[options]')}
 
-${chalk.black.bgRed.bold(" TEMPLATE_NAME ")}
-Available templates to generate : default ${chalk.red.bold('express-fullstack')}
+${chalk.red.bold("TEMPLATE_NAME ")}
+Available templates to generate : (Default ${chalk.red('express-fullstack')})
 
-${chalk.yellow.bold('JavaScript Templates :')}
-${chalk.red.bold('express-fullstack')} - FullStack Express App
-${chalk.red.bold('express-fullstack-with-sql')} - FullStack Express App + SQL
-${chalk.red.bold('express-fullstack-with-nosql')} - FullStack Express App + MongoDB
-${chalk.red.bold('express-rest-api')} - Restful API
-${chalk.red.bold('express-rest-api-with-sql')} - Restful API + SQL
-${chalk.red.bold('express-rest-api-with-nosql')} - Restful API + MongoDB
+${chalk.cyan('JavaScript Templates :')}
+${chalk.red('express-fullstack')} - FullStack Express App
+${chalk.red('express-fullstack-with-sql')} - FullStack Express App + SQL
+${chalk.red('express-fullstack-with-nosql')} - FullStack Express App + MongoDB
+${chalk.red('express-rest-api')} - Restful API
+${chalk.red('express-rest-api-with-sql')} - Restful API + SQL
+${chalk.red('express-rest-api-with-nosql')} - Restful API + MongoDB
 
-${chalk.blue.bold('Python Templates :')}
-${chalk.red.bold('django-sql')} - Django + SQL
-${chalk.red.bold('djangoRest')} - Django + Restful API
-${chalk.red.bold('flask-sql')} - Flask + SQL
-${chalk.red.bold('flaskRest')} - Flask + Restful API
+${chalk.cyan('Python Templates :')}
+${chalk.red('django-sql')} - Django + SQL
+${chalk.red('djangoRest')} - Django + Restful API
+${chalk.red('flask-sql')} - Flask + SQL
+${chalk.red('flaskRest')} - Flask + Restful API
 
-${chalk.black.bgYellow.bold(" OPTIONS ")}
+${chalk.yellow.bold("OPTIONS ")}
 
-${chalk.yellow('--yes')} Skips all prompts Default : ${chalk.yellow('false')}
-${chalk.yellow('--git')} Initializes git Default : ${chalk.yellow('false')}
-${chalk.yellow('--install')} Installs app dependecies Default : ${chalk.yellow('false')}
-${chalk.yellow('--help')} Project Information Default : ${chalk.yellow('false')}
+${chalk.yellow('--yes')} Skips all prompts (Default : ${chalk.yellow('false')})
+${chalk.yellow('--git')} Initializes git (Default : ${chalk.yellow('false')})
+${chalk.yellow('--install')} Installs app dependecies (Default : ${chalk.yellow('false')})
+${chalk.yellow('--help')} Project Information (Default : ${chalk.yellow('false')})
 `
     return docs;
 }
