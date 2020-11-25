@@ -7,8 +7,11 @@ Create-basic-app is a **CLI** tool for you to quickly bootstrap a new project  b
 
 ### 🔧 Install 
 To use the create-basic-app CLI clone the github repo and in your terminal change directory into the cloned repo. To install the CLI globally run
+
 ```npm i -g```
+
 To run the CLI without installing globally run (for testing or development)
+
 ```npm link```
 
 ### ✏ Usage 
@@ -28,6 +31,9 @@ To run the CLI without installing globally run (for testing or development)
 --help: Show commands and options information about the CLI
 
 ```
+
+![CLI usage](project.gif?raw=true)
+
 
 ### 📒 Available Templates to Generate  
 <br>
