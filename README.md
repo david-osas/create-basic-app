@@ -1,12 +1,15 @@
-# 👋 Project-Name
+# ⚙ Create-basic-app
 
+Create-basic-app is a **CLI** tool for you to quickly bootstrap a new project  boilerplate. By inputting different commands to the create-basic-app CLI in your terminal you can generate different starter codes for JavaScript based or Python based applications. This CLI was created to help developers quickly get started with their amazing and important tasks at hand and reduce the initial boilerplate code developers need to write.
 
-
-Project-Name is a **CLI** tool for you to quickly bootstrap a new project  boilerplate.
+***This CLI was created using Node.Js and as such you need to have Node.Js installed on your computer***
 
 
 ### 🔧 Install 
-~~`npm i -g @nkosi-tauro/create-basic-app`~~
+To use the create-basic-app CLI clone the github repo and in your terminal change directory into the cloned repo. To install the CLI globally run
+```npm i -g```
+To run the CLI without installing globally run (for testing or development)
+```npm link```
 
 ### ✏ Usage 
 
@@ -14,14 +17,15 @@ Project-Name is a **CLI** tool for you to quickly bootstrap a new project  boile
 
 *Example Usage*
 
-*`create-basic-app flask-sql flaskApp --git --pip`*
+*`create-basic-app flask-sql myFlaskApp --git --install`*
 
 ```
 [options] available :
 
 --git : Initialize git 
---install : Install npm packages
---pip : Install python packages
+--install : Install app dependencies
+--yes: Skip template option prompts
+--help: Show commands and options information about the CLI
 
 ```
 
@@ -31,11 +35,11 @@ Project-Name is a **CLI** tool for you to quickly bootstrap a new project  boile
 | ![JavaScript](https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)  | `<Template_Name>`|
 | ------------- | ------------- |
 | FullStack Express  | `fullstack`  |
-| FullStack Express + SQL  | `fullstack-with-sql`  |
-| FullStack Express + MongoDB  | `fullstack-with-nosql`  |
+| FullStack Express + PostgreSQL (sequelize ORM) | `fullstack-with-sql`  |
+| FullStack Express + MongoDB (mongoose ODM) | `fullstack-with-nosql`  |
 | Restful API  | `rest-api`  |
-| Restful API + SQL  | `rest-api-with-sql`  |
-| Restful API + MongoDB | `rest-api-with-nosql`  |
+| Restful API + PostgreSQL (sequelize ORM) | `rest-api-with-sql`  |
+| Restful API + MongoDB (mongoose ODM) | `rest-api-with-nosql`  |
 
 <br>
 
