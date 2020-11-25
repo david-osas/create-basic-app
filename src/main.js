@@ -105,6 +105,26 @@ function starterInstructions(primaryFunct){
     console.log('%s', chalk.cyan.italic('node index.js'));
     break;
 
+    case flaskgen:
+    console.log('\nTo start default app use the commands');
+    console.log('%s',chalk.cyan.italic('cd <app-name>'));
+    console.log('and then');
+    console.log('Create a virtual enviroment if needed');
+    console.log('%s', chalk.cyan.italic('python -m venv env'));
+    console.log('Set env variables and Initialise Database');
+    console.log('%s', chalk.cyan.italic('set FLASK_APP=flaskr'));
+    console.log('%s', chalk.cyan.italic('set FLASK_ENV=development'));
+    console.log('%s', chalk.cyan.italic('flask init-db'));
+    console.log('%s', chalk.cyan.italic('flask run'));
+    break;
+
+    case django:
+    console.log('\nTo start default app use the commands');
+    console.log('%s',chalk.cyan.italic('cd <app-name>'));
+    console.log('and then');
+    console.log('%s', chalk.cyan.italic('python manage.py runserver'));
+    break;
+
     default:
     console.log('');
 
