@@ -112,7 +112,7 @@ function starterInstructions(primaryFunct){
     console.log('Create a virtual enviroment if needed');
     console.log('%s', chalk.cyan.italic('python -m venv env'));
     console.log('Set env variables and Initialise Database');
-    console.log('%s', chalk.cyan.italic('set FLASK_APP=flaskr'));
+    console.log('%s', chalk.cyan.italic('set FLASK_APP=appname'));
     console.log('%s', chalk.cyan.italic('set FLASK_ENV=development'));
     console.log('%s', chalk.cyan.italic('flask init-db'));
     console.log('%s', chalk.cyan.italic('flask run'));
