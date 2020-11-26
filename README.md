@@ -31,7 +31,7 @@ npm link
 
 *Example Usage*
 
-*`create-basic-app flask-sql myFlaskApp --git --install`*
+*`create-basic-app flask-sql myFlaskApp --git --install --yes`*
 
 ```
 [options] available :
